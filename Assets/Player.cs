@@ -8,8 +8,6 @@ public class Player : MonoBehaviour
     public float moveSpeed = 1f;
     public Grid mapGrid;
     public Transform movePoint;
-    public Transform tarCell;
-
     public Vector3Int direction = new Vector3Int(1, 0, 0);
 
     private Animator animPlayer;
@@ -18,26 +16,23 @@ public class Player : MonoBehaviour
     void Start()
     {
         animPlayer = GetComponent<Animator>();
-        tarCell.parent = null;
         movePoint.parent = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3Int currCell = mapGrid.WorldToCell(transform.position) + new Vector3Int(0,1,0);
+        Vector3Int currCell = mapGrid.WorldToCell(transform.position) + new Vector3Int(0, 1, 0);
 
         var tilemap = mapGrid.GetComponentInChildren<Tilemap>();
 
         Vector3Int targetCell = currCell + direction;
 
-        Debug.Log(currCell);
-
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.5f)
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
-                Vector3Int dir = new Vector3Int((int) Input.GetAxisRaw("Horizontal"), 0, 0);
+                Vector3Int dir = new Vector3Int((int)Input.GetAxisRaw("Horizontal"), 0, 0);
                 if (CheckCell(currCell + dir, tilemap))
                 {
                     targetCell = currCell + dir;
@@ -55,7 +50,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        tarCell.position = mapGrid.CellToWorld(targetCell);
         tilemap.SetTile(new Vector3Int(0, 0, 0), tilemap.GetTile(targetCell));
 
         if (CheckCell(targetCell, tilemap))
@@ -64,40 +58,22 @@ public class Player : MonoBehaviour
         }
 
         // wrap around the screen
-        if (currCell.y == -17)
+        if (currCell.x <= -1)
         {
-            if (currCell.x <= -1)
-            {
-                transform.position = mapGrid.CellToWorld(new Vector3Int(27, -17, 0)) + new Vector3(0.25f, -0.25f, 0);
-                targetCell = new Vector3Int(26, -17, 0);
-                direction = new Vector3Int(-1, 0, 0); // to the left
+            transform.position = mapGrid.CellToWorld(new Vector3Int(27, -17, 0)) + new Vector3(0.25f, -0.25f, 0);
+            targetCell = new Vector3Int(26, -17, 0);
+            direction = new Vector3Int(-1, 0, 0); // to the left
 
-            }
-            else if (currCell.x >= 28)
-            {
-                transform.position = mapGrid.CellToWorld(new Vector3Int(0, -17, 0)) +new Vector3(0.25f, -0.25f, 0);
-                targetCell = new Vector3Int(1, -17, 0);
-                direction = new Vector3Int(1, 0, 0); // to the right
-            }
         }
-        else
+        else if (currCell.x >= 28)
         {
-            if (currCell.x <= 0)
-            {
-                transform.position = mapGrid.CellToWorld(new Vector3Int(27, -17, 0)) + new Vector3(0.25f, -0.25f, 0);
-                targetCell = new Vector3Int(26, -17, 0);
-                direction = new Vector3Int(-1, 0, 0); // to the left
-            }
-            else if (currCell.x >= 27)
-            {
-                transform.position = mapGrid.CellToWorld(new Vector3Int(0, -17, 0)) + new Vector3(0.25f, -0.25f, 0);
-                targetCell = new Vector3Int(1, -17, 0);
-                direction = new Vector3Int(1, 0, 0); // to the right
-            }
+            transform.position = mapGrid.CellToWorld(new Vector3Int(0, -17, 0)) + new Vector3(0.25f, -0.25f, 0);
+            targetCell = new Vector3Int(1, -17, 0);
+            direction = new Vector3Int(1, 0, 0); // to the right
         }
 
         // switch didn't work unfortunately
-        if (direction == new Vector3Int(1,0,0))
+        if (direction == new Vector3Int(1, 0, 0))
         {
             animPlayer.Play("Base Layer.Right");
         }
