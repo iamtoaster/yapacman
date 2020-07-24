@@ -53,23 +53,26 @@ public class MovementLogic
 
         tilemap.SetTile(new Vector3Int(0, 0, 0), tilemap.GetTile(targetCell));
 
+
+        Vector3 cellMiddleTranslation = new Vector3((tilemap.cellSize / 2f).x, (-tilemap.cellSize / 2f).y, 0);
+
         if (CheckCell(targetCell, tilemap))
         {
-            movePoint.position = mapGrid.CellToWorld(targetCell) + (tilemap.cellSize / 2f);
+            movePoint.position = mapGrid.CellToWorld(targetCell) + cellMiddleTranslation;
         }
 
         // wrap around the screen
         // the portal across the screen is at y = -17
         if (currCell.x <= tilemap.cellBounds.xMin - 1)
         {
-            target.transform.position = mapGrid.CellToWorld(new Vector3Int(tilemap.cellBounds.xMax - 1, -17, 0)) + (tilemap.cellSize / 2f);
+            target.transform.position = mapGrid.CellToWorld(new Vector3Int(tilemap.cellBounds.xMax - 1, -17, 0)) + cellMiddleTranslation;
             targetCell = new Vector3Int(tilemap.cellBounds.xMax - 2, -17, 0);
             direction = new Vector3Int(-1, 0, 0); // to the left
 
         }
         else if (currCell.x >= tilemap.cellBounds.xMax)
         {
-            target.transform.position = mapGrid.CellToWorld(new Vector3Int(tilemap.cellBounds.xMin, -17, 0)) + (tilemap.cellSize / 2f);
+            target.transform.position = mapGrid.CellToWorld(new Vector3Int(tilemap.cellBounds.xMin, -17, 0)) + cellMiddleTranslation;
             targetCell = new Vector3Int(tilemap.cellBounds.xMin + 1, -17, 0);
             direction = new Vector3Int(1, 0, 0); // to the right
         }
