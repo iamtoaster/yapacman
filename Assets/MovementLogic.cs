@@ -11,19 +11,21 @@ public class MovementLogic
     public Transform movePoint;
     public Vector3Int direction = new Vector3Int(1, 0, 0);
     public Animator animPlayer;
+    public GameObject target;
 
-    public MovementLogic(float moveSpeed, Grid mapGrid, Transform movePoint, Vector3Int direction, Animator animPlayer)
+    public MovementLogic(float moveSpeed, Grid mapGrid, Transform movePoint, Vector3Int direction, Animator animPlayer, GameObject target)
     {
         this.moveSpeed = moveSpeed;
-        this.mapGrid = mapGrid ?? throw new ArgumentNullException(nameof(mapGrid));
-        this.movePoint = movePoint ?? throw new ArgumentNullException(nameof(movePoint));
+        this.mapGrid = mapGrid;
+        this.movePoint = movePoint;
         this.direction = direction;
-        this.animPlayer = animPlayer ?? throw new ArgumentNullException(nameof(animPlayer));
+        this.animPlayer = animPlayer;
+        this.target = target;
     }
 
-    public void ProcessMovement(GameObject target, float hInput, float vInput)
+    public void ProcessMovement(float hInput, float vInput)
     {
-        Vector3Int currCell = GetCurrentCell(target); // i don't know why but it works only like this
+        Vector3Int currCell = GetCurrentCell(); // i don't know why but it works only like this
 
         Tilemap tilemap = mapGrid.GetComponentInChildren<Tilemap>();
 
@@ -98,9 +100,13 @@ public class MovementLogic
         target.transform.position = Vector3.MoveTowards(target.transform.position, movePoint.position, moveSpeed * Time.deltaTime);
     }
 
-    public Vector3Int GetCurrentCell(GameObject target)
+    public Vector3Int GetCurrentCell()
     {
         return mapGrid.WorldToCell(target.transform.position) + new Vector3Int(0, 1, 0);
+    }
+    public Vector3Int GetTargetCell()
+    {
+        return GetCurrentCell() + direction;
     }
 
     public bool CheckCell(Vector3Int targetCell, Tilemap tilemap)
