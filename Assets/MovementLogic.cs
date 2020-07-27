@@ -12,22 +12,24 @@ public class MovementLogic
     public Vector3Int direction = new Vector3Int(1, 0, 0);
     public Animator animPlayer;
     public GameObject target;
-
+    public Tilemap tilemap;
     public MovementLogic(float moveSpeed, Grid mapGrid, Transform movePoint, Vector3Int direction, Animator animPlayer, GameObject target)
     {
         this.moveSpeed = moveSpeed;
-        this.mapGrid = mapGrid;
-        this.movePoint = movePoint;
+        this.mapGrid = mapGrid ?? throw new ArgumentNullException(nameof(mapGrid));
+        this.movePoint = movePoint ?? throw new ArgumentNullException(nameof(movePoint));
         this.direction = direction;
-        this.animPlayer = animPlayer;
-        this.target = target;
+        this.animPlayer = animPlayer ?? throw new ArgumentNullException(nameof(animPlayer));
+        this.target = target ?? throw new ArgumentNullException(nameof(target));
+
+        tilemap = mapGrid.GetComponentInChildren<Tilemap>();
     }
 
     public void ProcessMovement(float hInput, float vInput)
     {
         Vector3Int currCell = GetCurrentCell(); // i don't know why but it works only like this
 
-        Tilemap tilemap = mapGrid.GetComponentInChildren<Tilemap>();
+        tilemap = mapGrid.GetComponentInChildren<Tilemap>();
 
         Vector3Int targetCell = currCell + direction;
 
