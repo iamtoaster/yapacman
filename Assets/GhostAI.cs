@@ -14,6 +14,8 @@ public class GhostAI : Maneuverable
     public State state = State.Scatter;
     public GhostType ghostType = GhostType.Red;
     public Player pacman;
+    public GhostAI redGhost; // Only needed for cyan ghost
+
 
     private Vector3Int prevCell = new Vector3Int(0, 0, 0);
     private Vector3Int targetCell = new Vector3Int(0, 0, 0);
@@ -146,7 +148,27 @@ public class GhostAI : Maneuverable
 
     private Vector3Int GetChasePoint()
     {
-        return pacman.CurrentCell;
+        switch (ghostType)
+        {
+            case GhostType.Red:
+                return pacman.CurrentCell;
+            case GhostType.Yellow:
+                if (Vector3Int.Distance(moveLogic.GetCurrentCell(), pacman.CurrentCell) < 8)
+                {
+                    return GetScatterPoint();
+                }
+                else
+                {
+                    return pacman.CurrentCell;
+                }
+            case GhostType.Magenta:
+                return pacman.CurrentCell + (pacman.Direction * 4); // four cells ahead of pacman
+            case GhostType.Cyan:
+                var target1 = pacman.CurrentCell + (pacman.Direction * 2);
+                return target1 + (target1 - redGhost.CurrentCell);
+            default:
+                throw new InvalidDataException("Unknown ghost type.");
+        }
     }
 
     private static int GetOppositeDirection(int direction)

@@ -44,4 +44,8 @@ public class Maneuverable : MonoBehaviour
 
         moveLogic = new MovementLogic(moveSpeed, mapGrid, movePoint, direction, animPlayer, gameObject);
     }
+
+    public Vector3Int CurrentCell => moveLogic.GetCurrentCell();
+
+    public Vector3Int Direction => moveLogic.direction;
 }

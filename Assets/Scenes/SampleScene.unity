@@ -242,9 +242,10 @@ MonoBehaviour:
   movePoint: {fileID: 310679299}
   direction: {x: 1, y: 0, z: 0}
   wave: 0
-  state: 1
+  state: 0
   ghostType: 2
   pacman: {fileID: 1535107238}
+  redGhost: {fileID: 0}
 --- !u!156049354 &294724527 stripped
 Grid:
   m_CorrespondingSourceObject: {fileID: -4214571822130301191, guid: fd684944ce798d6439790d8c07e51cc1,
@@ -484,9 +485,10 @@ MonoBehaviour:
   movePoint: {fileID: 1799025803}
   direction: {x: 1, y: 0, z: 0}
   wave: 0
-  state: 1
+  state: 0
   ghostType: 1
   pacman: {fileID: 1535107238}
+  redGhost: {fileID: 1822196924}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,9 +1774,10 @@ MonoBehaviour:
   movePoint: {fileID: 1163576951}
   direction: {x: 1, y: 0, z: 0}
   wave: 0
-  state: 1
+  state: 0
   ghostType: 0
   pacman: {fileID: 1535107238}
+  redGhost: {fileID: 0}
 --- !u!1 &1916724883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,6 +2039,7 @@ MonoBehaviour:
   movePoint: {fileID: 984151347}
   direction: {x: -1, y: 0, z: 0}
   wave: 0
-  state: 1
+  state: 0
   ghostType: 3
   pacman: {fileID: 1535107238}
+  redGhost: {fileID: 0}
