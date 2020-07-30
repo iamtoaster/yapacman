@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public enum State { Chase, Frightened, Scatter }
+public enum State { Chase, Frightened, Scatter, InBox }
 public enum GhostType { Red, Cyan, Magenta, Yellow }
 
 public class GhostAI : Maneuverable
@@ -16,9 +16,10 @@ public class GhostAI : Maneuverable
     public Player pacman;
     public GhostAI redGhost; // Only needed for cyan ghost
 
-
+    private BoundsInt startingBox = new BoundsInt(new Vector3Int(14, -17, 0), new Vector3Int(3, 2, 0)); // hardcoded start box because why not
     private Vector3Int prevCell = new Vector3Int(0, 0, 0);
     private Vector3Int targetCell = new Vector3Int(0, 0, 0);
+    private Timer timer;
 
     private readonly Dictionary<int, Vector3Int> directions = new Dictionary<int, Vector3Int>
     {
@@ -44,10 +45,19 @@ public class GhostAI : Maneuverable
 
         if (ccell == prevCell)
         {
-            moveLogic.ProcessMovement(hInput, vInput);
+            if (state == State.InBox)
+            {
+                moveLogic.ProcessMovement(hInput, vInput, false);
+            }
+            else
+            {
+                moveLogic.ProcessMovement(hInput, vInput);
+            }
             return;
         }
 
+
+        UpdateState();
         UpdateTargetPoint();
 
         var oppositeDir = GetOppositeDirection(directions.GetKeyByValue(moveLogic.direction));
@@ -56,11 +66,24 @@ public class GhostAI : Maneuverable
 
         for (int i = 0; i < 4; i++)
         {
-            if (moveLogic.CheckCell(ccell + directions[i], tilemap))
+            if (state == State.InBox)
             {
-                if (i != oppositeDir)
+                if (moveLogic.CheckCell(ccell + directions[i], tilemap, false))
                 {
-                    possibleTurns.Add(i);
+                    if (i != oppositeDir)
+                    {
+                        possibleTurns.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                if (moveLogic.CheckCell(ccell + directions[i], tilemap))
+                {
+                    if (i != oppositeDir)
+                    {
+                        possibleTurns.Add(i);
+                    }
                 }
             }
         }
@@ -69,18 +92,35 @@ public class GhostAI : Maneuverable
         {
             case State.Frightened:
                 FrightenedBehaviour(ref hInput, ref vInput, ccell, possibleTurns);
+                moveLogic.ProcessMovement(hInput, vInput);
                 break;
             case State.Scatter:
             case State.Chase:
                 PathFindingBehaviour(ref hInput, ref vInput, ccell, possibleTurns);
+                moveLogic.ProcessMovement(hInput, vInput);
+                break;
+            case State.InBox:
+                PathFindingBehaviour(ref hInput, ref vInput, ccell, possibleTurns);
+                moveLogic.ProcessMovement(hInput, vInput, false);
                 break;
             default:
                 throw new InvalidDataException("Unknown state.");
         }
 
         prevCell = ccell;
+    }
 
-        moveLogic.ProcessMovement(hInput, vInput);
+    private void UpdateState()
+    {
+        if (!IsInBox())
+        {
+            state = State.Scatter;
+        }
+    }
+
+    private bool IsInBox()
+    {
+        return (CurrentCell.x > 10 && CurrentCell.x < 17 && CurrentCell.y < -15 && CurrentCell.y > -19);
     }
 
     private void PathFindingBehaviour(ref float hInput, ref float vInput, Vector3Int ccell, List<int> possibleTurns)
@@ -122,6 +162,9 @@ public class GhostAI : Maneuverable
                 break;
             case State.Scatter:
                 targetCell = GetScatterPoint();
+                break;
+            case State.InBox:
+                targetCell = new Vector3Int(14, -13, 0);
                 break;
             default:
                 throw new InvalidDataException("Unknown state.");

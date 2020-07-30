@@ -16,5 +16,4 @@ public class Player : Maneuverable
         moveLogic.ProcessMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
-    public Vector3Int CurrentCell => moveLogic.GetCurrentCell();
 }

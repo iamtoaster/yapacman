@@ -25,7 +25,7 @@ public class MovementLogic
         tilemap = mapGrid.GetComponentInChildren<Tilemap>();
     }
 
-    public void ProcessMovement(float hInput, float vInput)
+    public void ProcessMovement(float hInput, float vInput, bool checkForBoxEntrance = true)
     {
         Vector3Int currCell = GetCurrentCell(); // i don't know why but it works only like this
 
@@ -38,7 +38,7 @@ public class MovementLogic
             if (Mathf.Abs(hInput) == 1f)
             {
                 Vector3Int dir = new Vector3Int((int)hInput, 0, 0);
-                if (CheckCell(currCell + dir, tilemap))
+                if (CheckCell(currCell + dir, tilemap, checkForBoxEntrance))
                 {
                     targetCell = currCell + dir;
                     direction = dir;
@@ -47,7 +47,7 @@ public class MovementLogic
             else if (Mathf.Abs(vInput) == 1f)
             {
                 Vector3Int dir = new Vector3Int(0, (int)vInput, 0);
-                if (CheckCell(currCell + dir, tilemap))
+                if (CheckCell(currCell + dir, tilemap, checkForBoxEntrance))
                 {
                     targetCell = currCell + dir;
                     direction = dir;
@@ -60,7 +60,7 @@ public class MovementLogic
 
         Vector3 cellMiddleTranslation = new Vector3((tilemap.cellSize / 2f).x, (-tilemap.cellSize / 2f).y, 0);
 
-        if (CheckCell(targetCell, tilemap))
+        if (CheckCell(targetCell, tilemap, checkForBoxEntrance))
         {
             movePoint.position = mapGrid.CellToWorld(targetCell) + cellMiddleTranslation;
         }
@@ -111,13 +111,16 @@ public class MovementLogic
         return GetCurrentCell() + direction;
     }
 
-    public bool CheckCell(Vector3Int targetCell, Tilemap tilemap)
+    public bool CheckCell(Vector3Int targetCell, Tilemap tilemap, bool checkForBoxEntrance = true)
     {
         if (tilemap.GetTile(targetCell) != null)
         {
             if (tilemap.GetTile(targetCell).name != "Tile_coltiles_1") // if not wall
             {
-                return true;
+                if (!checkForBoxEntrance || tilemap.GetTile(targetCell).name != "Tile_coltiles_4")
+                {
+                    return true;
+                }
             }
         }
         else
