@@ -15,4 +15,14 @@ public static class GameExtensions
     {
         return dict.FirstOrDefault(x => x.Value.Equals(value)).Key;
     }
+
+    public static bool IsNull(this object obj)
+    {
+        if (obj == null)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

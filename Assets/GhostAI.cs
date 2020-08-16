@@ -10,16 +10,15 @@ public enum GhostType { Red, Cyan, Magenta, Yellow }
 
 public class GhostAI : Maneuverable
 {
-    public int wave = 0;
     public State state = State.Scatter;
     public GhostType ghostType = GhostType.Red;
     public Player pacman;
     public GhostAI redGhost; // Only needed for cyan ghost
 
-    private BoundsInt startingBox = new BoundsInt(new Vector3Int(14, -17, 0), new Vector3Int(3, 2, 0)); // hardcoded start box because why not
+    public WaveTimer waveTimer;
+
     private Vector3Int prevCell = new Vector3Int(0, 0, 0);
     private Vector3Int targetCell = new Vector3Int(0, 0, 0);
-    private Timer timer;
 
     private readonly Dictionary<int, Vector3Int> directions = new Dictionary<int, Vector3Int>
     {
@@ -112,9 +111,13 @@ public class GhostAI : Maneuverable
 
     private void UpdateState()
     {
-        if (!IsInBox())
+        if (IsInBox())
         {
-            state = State.Scatter;
+            state = State.InBox;
+        }
+        else
+        {
+            state = waveTimer.waveState;
         }
     }
 

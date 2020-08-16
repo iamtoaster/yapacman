@@ -55,9 +55,6 @@ public class MovementLogic
             }
         }
 
-        tilemap.SetTile(new Vector3Int(0, 0, 0), tilemap.GetTile(targetCell));
-
-
         Vector3 cellMiddleTranslation = new Vector3((tilemap.cellSize / 2f).x, (-tilemap.cellSize / 2f).y, 0);
 
         if (CheckCell(targetCell, tilemap, checkForBoxEntrance))

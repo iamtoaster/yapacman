@@ -199,7 +199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47878600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32, y: 0, z: 0}
+  m_LocalPosition: {x: -0.72, y: 0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 310679299}
@@ -241,11 +241,11 @@ MonoBehaviour:
   mapGrid: {fileID: 294724527}
   movePoint: {fileID: 310679299}
   direction: {x: 1, y: 0, z: 0}
-  wave: 0
-  state: 0
+  state: 2
   ghostType: 2
   pacman: {fileID: 1535107238}
-  redGhost: {fileID: 0}
+  redGhost: {fileID: 1822196924}
+  waveTimer: {fileID: 845427937}
 --- !u!156049354 &294724527 stripped
 Grid:
   m_CorrespondingSourceObject: {fileID: -4214571822130301191, guid: fd684944ce798d6439790d8c07e51cc1,
@@ -442,7 +442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445868415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.85, y: -1.28, z: 0}
+  m_LocalPosition: {x: 0.32, y: 0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1799025803}
@@ -484,11 +484,11 @@ MonoBehaviour:
   mapGrid: {fileID: 294724527}
   movePoint: {fileID: 1799025803}
   direction: {x: 1, y: 0, z: 0}
-  wave: 0
-  state: 0
+  state: 2
   ghostType: 1
   pacman: {fileID: 1535107238}
   redGhost: {fileID: 1822196924}
+  waveTimer: {fileID: 845427937}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +729,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564846030}
   m_CullTransparentMesh: 0
+--- !u!1 &845427935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 845427936}
+  - component: {fileID: 845427937}
+  m_Layer: 0
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &845427936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845427935}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.0408974, y: -0.064844646, z: 51.260895}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &845427937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845427935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbfdf3ecab8c3b4d86b254348c61b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingWave: 0
+  Ghosts:
+  - {fileID: 1822196924}
+  - {fileID: 445868419}
+  - {fileID: 2072229548}
+  - {fileID: 47878604}
 --- !u!1 &867075543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,6 +1367,8 @@ MonoBehaviour:
   mapGrid: {fileID: 294724527}
   movePoint: {fileID: 1916724884}
   direction: {x: 1, y: 0, z: 0}
+  score_text: {fileID: 1679885644}
+  score: 0
 --- !u!1 &1679885642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,11 +1824,11 @@ MonoBehaviour:
   mapGrid: {fileID: 294724527}
   movePoint: {fileID: 1163576951}
   direction: {x: 1, y: 0, z: 0}
-  wave: 0
-  state: 0
+  state: 2
   ghostType: 0
   pacman: {fileID: 1535107238}
-  redGhost: {fileID: 0}
+  redGhost: {fileID: 1822196924}
+  waveTimer: {fileID: 845427937}
 --- !u!1 &1916724883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,6 +1966,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8106619510831448187, guid: fd684944ce798d6439790d8c07e51cc1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -2695619058785784247, guid: fd684944ce798d6439790d8c07e51cc1,
     type: 3}
@@ -1996,7 +2052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072229544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.54, y: -1.25, z: 0}
+  m_LocalPosition: {x: 1.33, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 984151347}
@@ -2038,8 +2094,8 @@ MonoBehaviour:
   mapGrid: {fileID: 294724527}
   movePoint: {fileID: 984151347}
   direction: {x: -1, y: 0, z: 0}
-  wave: 0
-  state: 0
+  state: 2
   ghostType: 3
   pacman: {fileID: 1535107238}
-  redGhost: {fileID: 0}
+  redGhost: {fileID: 1822196924}
+  waveTimer: {fileID: 845427937}
