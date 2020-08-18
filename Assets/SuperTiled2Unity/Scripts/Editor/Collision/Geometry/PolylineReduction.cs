@@ -1,7 +1,7 @@
-﻿using System;
+﻿using SuperTiled2Unity.Editor.ClipperLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using SuperTiled2Unity.Editor.ClipperLib;
 
 namespace SuperTiled2Unity.Editor.Geometry
 {

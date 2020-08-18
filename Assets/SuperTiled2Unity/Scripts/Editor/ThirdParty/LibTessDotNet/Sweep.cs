@@ -151,7 +151,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             var org = reg._eUp._Org;
 
             // Find the region above the uppermost edge with the same origin
-            do {
+            do
+            {
                 reg = RegionAbove(reg);
             } while (reg._eUp._Org == org);
 
@@ -172,7 +173,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             var dst = reg._eUp._Dst;
 
             // Find the region above the uppermost edge with the same destination
-            do {
+            do
+            {
                 reg = RegionAbove(reg);
             } while (reg._eUp._Dst == dst);
 
@@ -465,7 +467,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             }
             return true;
         }
-        
+
         /// <summary>
         /// Check the upper and lower edge of "regUp", to make sure that the
         /// eUp->Dst is above eLo, or eLo->Dst is below eUp (depending on which
@@ -546,7 +548,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             Debug.Assert(orgUp != _event && orgLo != _event);
             Debug.Assert(!regUp._fixUpperEdge && !regLo._fixUpperEdge);
 
-            if( orgUp == orgLo )
+            if (orgUp == orgLo)
             {
                 // right endpoints are the same
                 return false;
@@ -554,7 +556,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
             var tMinUp = Math.Min(orgUp._t, dstUp._t);
             var tMaxLo = Math.Max(orgLo._t, dstLo._t);
-            if( tMinUp > tMaxLo )
+            if (tMinUp > tMaxLo)
             {
                 // t ranges do not overlap
                 return false;
@@ -562,14 +564,14 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
             if (Geom.VertLeq(orgUp, orgLo))
             {
-                if (Geom.EdgeSign( dstLo, orgUp, orgLo ) > 0.0f)
+                if (Geom.EdgeSign(dstLo, orgUp, orgLo) > 0.0f)
                 {
                     return false;
                 }
             }
             else
             {
-                if (Geom.EdgeSign( dstUp, orgLo, orgUp ) < 0.0f)
+                if (Geom.EdgeSign(dstUp, orgLo, orgUp) < 0.0f)
                 {
                     return false;
                 }
@@ -615,9 +617,9 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 return false;
             }
 
-            if (   (! Geom.VertEq(dstUp, _event)
+            if ((!Geom.VertEq(dstUp, _event)
                 && Geom.EdgeSign(dstUp, _event, isect) >= 0.0f)
-                || (! Geom.VertEq(dstLo, _event)
+                || (!Geom.VertEq(dstLo, _event)
                 && Geom.EdgeSign(dstLo, _event, isect) <= 0.0f))
             {
                 // Very unusual -- the new upper or lower edge would pass on the
@@ -635,7 +637,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                     _pool.Return(isect);
                     return true;
                 }
-                if( dstUp == _event ) {
+                if (dstUp == _event)
+                {
                     /* Splice dstUp into eLo, and process the new region(s) */
                     _mesh.SplitEdge(_pool, eLo._Sym);
                     _mesh.Splice(_pool, eUp._Lnext, eLo._Oprev);
@@ -651,7 +654,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 // Special case: called from ConnectRightVertex. If either
                 // edge passes on the wrong side of tess._event, split it
                 // (and wait for ConnectRightVertex to splice it appropriately).
-                if (Geom.EdgeSign( dstUp, _event, isect ) >= 0.0f)
+                if (Geom.EdgeSign(dstUp, _event, isect) >= 0.0f)
                 {
                     RegionAbove(regUp)._dirty = regUp._dirty = true;
                     _mesh.SplitEdge(_pool, eUp._Sym);
@@ -718,8 +721,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 if (!regUp._dirty)
                 {
                     regLo = regUp;
-                    regUp = RegionAbove( regUp );
-                    if(regUp == null || !regUp._dirty)
+                    regUp = RegionAbove(regUp);
+                    if (regUp == null || !regUp._dirty)
                     {
                         // We've walked all the dirty regions
                         return;
@@ -745,7 +748,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                             regLo = RegionBelow(regUp);
                             eLo = regLo._eUp;
                         }
-                        else if( regUp._fixUpperEdge )
+                        else if (regUp._fixUpperEdge)
                         {
                             DeleteRegion(regUp);
                             _mesh.Delete(_pool, eUp);
@@ -756,9 +759,9 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 }
                 if (eUp._Org != eLo._Org)
                 {
-                    if(    eUp._Dst != eLo._Dst
-                        && ! regUp._fixUpperEdge && ! regLo._fixUpperEdge
-                        && (eUp._Dst == _event || eLo._Dst == _event) )
+                    if (eUp._Dst != eLo._Dst
+                        && !regUp._fixUpperEdge && !regLo._fixUpperEdge
+                        && (eUp._Dst == _event || eLo._Dst == _event))
                     {
                         // When all else fails in CheckForIntersect(), it uses tess._event
                         // as the intersection location. To make this possible, it requires
@@ -1151,11 +1154,12 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             }
             // Make sure there is enough space for sentinels.
             vertexCount += 8;
-    
+
             _pq = new PriorityQueue<MeshUtils.Vertex>(vertexCount, Geom.VertLeq);
 
             vHead = _mesh._vHead;
-            for( v = vHead._next; v != vHead; v = v._next ) {
+            for (v = vHead._next; v != vHead; v = v._next)
+            {
                 v._pqHandle = _pq.Insert(v);
                 if (v._pqHandle._handle == PQHandle.Invalid)
                 {

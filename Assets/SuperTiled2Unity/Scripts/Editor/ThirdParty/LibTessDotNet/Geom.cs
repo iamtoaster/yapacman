@@ -203,9 +203,9 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             {
                 b = 0.0f;
             }
-            return ((a <= b) ? ((b == 0.0f) ? ((x+y) / 2.0f)
-                    : (x + (y-x) * (a/(a+b))))
-                    : (y + (x-y) * (b/(a+b))));
+            return ((a <= b) ? ((b == 0.0f) ? ((x + y) / 2.0f)
+                    : (x + (y - x) * (a / (a + b))))
+                    : (y + (x - y) * (b / (a + b))));
         }
 
         static void Swap(ref MeshUtils.Vertex a, ref MeshUtils.Vertex b)

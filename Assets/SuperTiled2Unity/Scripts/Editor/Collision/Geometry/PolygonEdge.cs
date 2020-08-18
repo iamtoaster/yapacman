@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using UnityEngine.Assertions;
+﻿using UnityEngine;
 
 namespace SuperTiled2Unity.Editor.Geometry
 {
@@ -85,7 +80,7 @@ namespace SuperTiled2Unity.Editor.Geometry
                 var B = this.MajorPartner.Points[this.MajorPartner_pIndex];
                 var C = this.MinorPartner.NextPoint(this.MinorPartner_pIndex);
                 float cross = GeoMath.Cross(A, B, C);
-                if (cross  > 0)
+                if (cross > 0)
                     return false;
             }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveTimer : MonoBehaviour
@@ -15,7 +13,7 @@ public class WaveTimer : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         timer = Timer.Register(7f, WaveUpdate);
     }
 
@@ -23,7 +21,8 @@ public class WaveTimer : MonoBehaviour
     {
         wave++;
 
-        switch (wave) {
+        switch (wave)
+        {
             case 1:
                 waveState = State.Chase;
                 timer = Timer.Register(20f, WaveUpdate);
@@ -57,6 +56,6 @@ public class WaveTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

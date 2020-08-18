@@ -1,8 +1,6 @@
-﻿using System;
+﻿using SuperTiled2Unity.Editor.LibTessDotNet;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using SuperTiled2Unity.Editor.LibTessDotNet;
 using UnityEngine;
 
 namespace SuperTiled2Unity.Editor.Geometry

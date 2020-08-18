@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using SuperTiled2Unity.Editor.Diablo404;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using SuperTiled2Unity.Editor.Diablo404;
 using UnityEditor;
 using UnityEngine;
 

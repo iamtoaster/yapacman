@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,7 +20,9 @@ public static class GameExtensions
         if (obj == null)
         {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

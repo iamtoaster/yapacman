@@ -72,7 +72,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
         public Node InsertBefore(Node node, TValue key)
         {
-            do {
+            do
+            {
                 node = node._prev;
             } while (node._key != null && !_leq(node._key, key));
 
@@ -88,7 +89,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
         public Node Find(TValue key)
         {
             var node = _head;
-            do {
+            do
+            {
                 node = node._next;
             } while (node._key != null && !_leq(key, node._key));
             return node;

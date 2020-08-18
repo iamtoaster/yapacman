@@ -178,7 +178,7 @@ namespace SuperTiled2Unity.Editor
 
         private void PushAtlasTexture()
         {
-            string textureName = string.Format("Atlas_{0}_{1}", m_TilesetScript.name,  m_AtlasTextures.Count + 1);
+            string textureName = string.Format("Atlas_{0}_{1}", m_TilesetScript.name, m_AtlasTextures.Count + 1);
 
             // Create the texture with a starter color that stands out
             m_CurrentAtlas = new Texture2D(m_AtlasWidth, m_AtlasHeight, TextureFormat.ARGB32, false);

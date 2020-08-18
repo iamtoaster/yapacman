@@ -199,7 +199,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 tNorm.X = d1.Y * d2.Z - d1.Z * d2.Y;
                 tNorm.Y = d1.Z * d2.X - d1.X * d2.Z;
                 tNorm.Z = d1.X * d2.Y - d1.Y * d2.X;
-                tLen2 = tNorm.X*tNorm.X + tNorm.Y*tNorm.Y + tNorm.Z*tNorm.Z;
+                tLen2 = tNorm.X * tNorm.X + tNorm.Y * tNorm.Y + tNorm.Z * tNorm.Z;
                 if (tLen2 > maxLen2)
                 {
                     maxLen2 = tLen2;
@@ -403,7 +403,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             {
                 // Since f will be destroyed, save its next pointer.
                 next = f._next;
-                if( ! f._inside ) {
+                if (!f._inside)
+                {
                     _mesh.ZapFace(_pool, f);
                 }
             }
@@ -498,7 +499,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
                 edge = f._anEdge;
                 faceVerts = 0;
-                do {
+                do
+                {
                     v = edge._Org;
                     if (v._n == MeshUtils.Undef)
                     {
@@ -553,7 +555,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 // Store polygon
                 edge = f._anEdge;
                 faceVerts = 0;
-                do {
+                do
+                {
                     v = edge._Org;
                     _elements[elementIndex++] = v._n;
                     faceVerts++;
@@ -622,7 +625,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
                 vertCount = 0;
                 start = edge = f._anEdge;
-                do {
+                do
+                {
                     _vertices[vertIndex].Position = edge._Org._coords;
                     _vertices[vertIndex].Data = edge._Org._data;
                     ++vertIndex;

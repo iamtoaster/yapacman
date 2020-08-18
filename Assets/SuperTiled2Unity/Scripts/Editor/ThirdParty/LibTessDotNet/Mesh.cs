@@ -33,8 +33,6 @@
 
 // Seanba edit: Put LibTessDotNet in unique namespace so avoid name collisions
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 #if DOUBLE
@@ -353,7 +351,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             // walk around face, deleting edges whose right face is also NULL
             var eNext = eStart._Lnext;
             MeshUtils.Edge e, eSym;
-            do {
+            do
+            {
                 e = eNext;
                 eNext = e._Lnext;
 
@@ -451,7 +450,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             for (fPrev = _fHead; (f = fPrev._next) != _fHead; fPrev = f)
             {
                 e = f._anEdge;
-                do {
+                do
+                {
                     Debug.Assert(e._Sym != e);
                     Debug.Assert(e._Sym._Sym == e);
                     Debug.Assert(e._Lnext._Onext._Sym == e);

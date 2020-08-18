@@ -29,7 +29,7 @@ namespace SuperTiled2Unity.Editor
 
         [SerializeField]
         private int m_AnimationFramerate = 20;
-        public int AnimationFramerate {  get { return m_AnimationFramerate; } }
+        public int AnimationFramerate { get { return m_AnimationFramerate; } }
 
         [SerializeField]
         private Material m_DefaultMaterial = null;

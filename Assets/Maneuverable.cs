@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,7 +22,7 @@ public class Maneuverable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Init()
@@ -32,7 +30,7 @@ public class Maneuverable : MonoBehaviour
         if (gameObject.HasComponent<Animator>())
         {
             animPlayer = GetComponent<Animator>();
-        } 
+        }
         else
         {
             throw new NotImplementedException("Generating Animator dynamically not supported. Add Animator with animations first.");

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
-public enum State { Chase, Frightened, Scatter, InBox }
+public enum State { Chase, Frightened, Scatter, InBox, Reset }
 public enum GhostType { Red, Cyan, Magenta, Yellow }
 
 public class GhostAI : Maneuverable
@@ -20,6 +17,10 @@ public class GhostAI : Maneuverable
     private Vector3Int prevCell = new Vector3Int(0, 0, 0);
     private Vector3Int targetCell = new Vector3Int(0, 0, 0);
 
+    private Vector3 startingPosition;
+    private Vector3Int startingDirection;
+    private State startingState;
+
     private readonly Dictionary<int, Vector3Int> directions = new Dictionary<int, Vector3Int>
     {
         { 0, new Vector3Int(-1, 0, 0) }, // Left
@@ -32,6 +33,9 @@ public class GhostAI : Maneuverable
     void Start()
     {
         base.Init();
+        startingPosition = transform.position;
+        startingDirection = moveLogic.direction;
+        startingState = state;
     }
 
     // Update is called once per frame
@@ -58,6 +62,7 @@ public class GhostAI : Maneuverable
 
         UpdateState();
         UpdateTargetPoint();
+
 
         var oppositeDir = GetOppositeDirection(directions.GetKeyByValue(moveLogic.direction));
 
@@ -109,11 +114,22 @@ public class GhostAI : Maneuverable
         prevCell = ccell;
     }
 
+    public void Reset()
+    {
+        transform.position = startingPosition;
+        moveLogic.direction = startingDirection;
+        state = startingState;
+    }
+
     private void UpdateState()
     {
         if (IsInBox())
         {
             state = State.InBox;
+        }
+        else if (waveTimer.waveState == State.Reset)
+        {
+            Reset();
         }
         else
         {

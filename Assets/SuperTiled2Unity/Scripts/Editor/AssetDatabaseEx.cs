@@ -42,7 +42,7 @@ namespace SuperTiled2Unity.Editor
             var guids = AssetDatabase.FindAssets("t: script " + name);
 
             if (guids.Any())
-            { 
+            {
                 return AssetDatabase.GUIDToAssetPath(guids[0]);
             }
 

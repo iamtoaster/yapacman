@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using SuperTiled2Unity.Editor.Geometry;
+using System.Linq;
 using System.Xml.Linq;
-using SuperTiled2Unity.Editor.Geometry;
 using UnityEngine;
 using UnityEngine.Assertions;
 

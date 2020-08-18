@@ -38,7 +38,6 @@
 #endif
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -123,7 +122,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
         void Return(object obj);
     }
 
-    public class DefaultTypePool<T> : ITypePool where T: class, Pooled<T>, new()
+    public class DefaultTypePool<T> : ITypePool where T : class, Pooled<T>, new()
     {
         private Queue<T> _pool = new Queue<T>();
 
@@ -287,7 +286,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 {
                     int n = 0;
                     var eCur = _anEdge;
-                    do {
+                    do
+                    {
                         n++;
                         eCur = eCur._Lnext;
                     } while (eCur != _anEdge);
@@ -341,7 +341,7 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
             internal int _winding;
 
             internal Face _Rface { get { return _Sym._Lface; } set { _Sym._Lface = value; } }
-            internal Vertex _Dst { get { return _Sym._Org; }  set { _Sym._Org = value; } }
+            internal Vertex _Dst { get { return _Sym._Org; } set { _Sym._Org = value; } }
 
             internal Edge _Oprev { get { return _Sym._Lnext; } set { _Sym._Lnext = value; } }
             internal Edge _Lprev { get { return _Onext._Sym; } set { _Onext._Sym = value; } }
@@ -414,7 +414,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
             // fix other edges on this vertex loop
             var e = eOrig;
-            do {
+            do
+            {
                 e._Org = vNew;
                 e = e._Onext;
             } while (e != eOrig);
@@ -448,7 +449,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
             // fix other edges on this face loop
             var e = eOrig;
-            do {
+            do
+            {
                 e._Lface = fNew;
                 e = e._Lnext;
             } while (e != eOrig);
@@ -526,7 +528,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
             // change the origin of all affected edges
             var e = eStart;
-            do {
+            do
+            {
                 e._Org = newOrg;
                 e = e._Onext;
             } while (e != eStart);
@@ -550,7 +553,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
 
             // change the left face of all affected edges
             var e = eStart;
-            do {
+            do
+            {
                 e._Lface = newLFace;
                 e = e._Lnext;
             } while (e != eStart);

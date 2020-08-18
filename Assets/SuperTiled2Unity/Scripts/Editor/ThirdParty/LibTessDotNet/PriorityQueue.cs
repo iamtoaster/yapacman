@@ -109,7 +109,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                     _order[p] = piv;
                     i = p - 1;
                     j = r + 1;
-                    do {
+                    do
+                    {
                         do { ++i; } while (!_leq(_keys[_order[i]], _keys[piv]));
                         do { --j; } while (!_leq(_keys[piv], _keys[_order[j]]));
                         Swap(ref _order[i], ref _order[j]);
@@ -184,7 +185,8 @@ namespace SuperTiled2Unity.Editor.LibTessDotNet
                 if (_leq(heapMin, sortMin))
                     return _heap.ExtractMin();
             }
-            do {
+            do
+            {
                 --_size;
             } while (_size > 0 && _keys[_order[_size - 1]] == null);
 

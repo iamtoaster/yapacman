@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
+using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEditor.Experimental.AssetImporters;
 
 namespace SuperTiled2Unity.Editor
 {

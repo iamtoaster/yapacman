@@ -116,7 +116,7 @@ namespace SuperTiled2Unity
             m_Position = LocalTransform(m_Position, tile);
         }
 
-        private Vector2 IsometricTransform(Vector2 pt, SuperTile tile,Vector2 gridSize)
+        private Vector2 IsometricTransform(Vector2 pt, SuperTile tile, Vector2 gridSize)
         {
             float cx = pt.x / gridSize.y;
             float cy = pt.y / gridSize.y;
