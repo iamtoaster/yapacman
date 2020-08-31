@@ -76,24 +76,6 @@ public class MovementLogic
             direction = new Vector3Int(1, 0, 0); // to the right
         }
 
-        // switch didn't work unfortunately
-        if (direction == new Vector3Int(1, 0, 0))
-        {
-            animPlayer.Play("Base Layer.Right");
-        }
-        if (direction == new Vector3Int(-1, 0, 0))
-        {
-            animPlayer.Play("Base Layer.Left");
-        }
-        if (direction == new Vector3Int(0, 1, 0))
-        {
-            animPlayer.Play("Base Layer.Up");
-        }
-        if (direction == new Vector3Int(0, -1, 0))
-        {
-            animPlayer.Play("Base Layer.Down");
-        }
-
         target.transform.position = Vector3.MoveTowards(target.transform.position, movePoint.position, moveSpeed * Time.deltaTime);
     }
 

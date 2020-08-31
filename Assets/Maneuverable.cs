@@ -2,16 +2,20 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Maneuverable : MonoBehaviour
+public abstract class Maneuverable : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public Grid mapGrid;
     public Transform movePoint;
     public Vector3Int direction = new Vector3Int(1, 0, 0);
 
-    protected Animator animPlayer;
-    protected MovementLogic moveLogic;
+    public Animator animPlayer;
     protected Tilemap tilemap;
+
+    internal MovementLogic moveLogic;
+
+    private Vector3 startingPosition;
+    private Vector3Int startingDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,16 @@ public class Maneuverable : MonoBehaviour
         movePoint.parent = null;
 
         moveLogic = new MovementLogic(moveSpeed, mapGrid, movePoint, direction, animPlayer, gameObject);
+
+
+        startingPosition = transform.position;
+        startingDirection = moveLogic.direction;
+    }
+
+    public void Reset()
+    {
+        transform.position = startingPosition;
+        moveLogic.direction = startingDirection;
     }
 
     public Vector3Int CurrentCell => moveLogic.GetCurrentCell();

@@ -34,7 +34,7 @@ TextureImporter:
     second: pacman_dying_11
   - first:
       213: 726098045347778733
-    second: sprites32_10
+    second: empty
   - first:
       213: -2089305249584383641
     second: sprites32_11
@@ -1939,6 +1939,27 @@ TextureImporter:
       bones: []
       spriteID: da078506e6cbb8820800000000000000
       internalID: 2921635965528731821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: empty
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 248
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da05f01435e931a00800000000000000
+      internalID: 726098045347778733
       vertices: []
       indices: 
       edges: []
